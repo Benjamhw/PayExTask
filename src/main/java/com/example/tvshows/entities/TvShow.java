@@ -1,7 +1,8 @@
 package com.example.tvshows.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Builder;
 
 import java.util.List;
 
@@ -12,9 +13,11 @@ public class TvShow {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Episode> episodes;
     private Double rating;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name = "network_id")
     private Network network;
     private String imdbLink;

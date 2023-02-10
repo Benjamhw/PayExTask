@@ -1,5 +1,6 @@
 package com.example.tvshows.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class Episode {
     private String episode;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tv_show_id")
+    @JsonBackReference
     private TvShow show;
     private Long externalId;
 
@@ -65,5 +67,16 @@ public class Episode {
 
     public void setExternalId(Long externalId) {
         this.externalId = externalId;
+    }
+
+    @Override
+    public String toString() {
+        return "Episode{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", season='" + season + '\'' +
+                ", episode='" + episode + '\'' +
+                ", externalId=" + externalId +
+                '}';
     }
 }

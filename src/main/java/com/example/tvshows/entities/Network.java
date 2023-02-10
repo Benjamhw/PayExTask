@@ -1,5 +1,6 @@
 package com.example.tvshows.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class Network {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "network", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<TvShow> shows;
     private Long externalId;
     public Network() {
