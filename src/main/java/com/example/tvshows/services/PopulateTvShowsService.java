@@ -44,7 +44,7 @@ public class PopulateTvShowsService implements CommandLineRunner
         ArrayList<String> dataShowTitles = new ArrayList<>();
 
         try {
-            File myObj = new File("/Users/benwee/Documents/Projects/PayEx/Task/tv-shows/src/main/resources/shows.txt");
+            File myObj = new File("src/main/resources/shows.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
