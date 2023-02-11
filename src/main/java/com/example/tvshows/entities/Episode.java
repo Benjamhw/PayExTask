@@ -16,6 +16,7 @@ public class Episode {
     @JsonBackReference
     private TvShow show;
     private Long externalId;
+    private double rating;
 
     public Episode() {
         super();
@@ -67,6 +68,14 @@ public class Episode {
 
     public void setExternalId(Long externalId) {
         this.externalId = externalId;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     @Override

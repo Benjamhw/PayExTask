@@ -33,6 +33,7 @@ public class Factory {
         episode.setName(json.path("name").asText());
         episode.setSeason(json.path("season").asText());
         episode.setEpisode(json.path("number").asText());
+        episode.setRating(json.path("rating").path("average").asDouble());
 
         return episode;
     }
