@@ -21,20 +21,22 @@ public class TvShow {
     @JoinColumn(name = "network_id")
     private Network network;
     private String imdbLink;
-    private String discription;
+    private String description;
     private String imageUrl;
     private Long externalId;
-
+    private int episodeCount;
+    @ManyToMany
+    private List<Genre> genres;
     public TvShow() {
         super();
     }
 
-    public TvShow(String name, Double rating, String imdbLink, String discription, String imageUrl) {
+    public TvShow(String name, Double rating, String imdbLink, String description, String imageUrl) {
         super();
         this.name = name;
         this.rating = rating;
         this.imdbLink = imdbLink;
-        this.discription = discription;
+        this.description = description;
         this.imageUrl = imageUrl;
     }
 
@@ -86,12 +88,12 @@ public class TvShow {
         this.imdbLink = imdbLink;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageUrl() {
@@ -108,6 +110,22 @@ public class TvShow {
 
     public void setExternalId(Long externalId) {
         this.externalId = externalId;
+    }
+
+    public int getEpisodeCount() {
+        return episodeCount;
+    }
+
+    public void setEpisodeCount(int episodeCount) {
+        this.episodeCount = episodeCount;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
     @Override

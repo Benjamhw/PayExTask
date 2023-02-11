@@ -1,10 +1,12 @@
 package com.example.tvshows.services;
 
 import com.example.tvshows.entities.Episode;
+import com.example.tvshows.entities.Genre;
 import com.example.tvshows.entities.Network;
 import com.example.tvshows.entities.TvShow;
 import com.example.tvshows.factory.Factory;
 import com.example.tvshows.repositories.EpisodeRepository;
+import com.example.tvshows.repositories.GenreRepository;
 import com.example.tvshows.repositories.NetworkRepository;
 import com.example.tvshows.repositories.TvShowRepository;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -27,16 +29,19 @@ public class PopulateTvShowsService implements CommandLineRunner
     private EpisodeRepository episodeRepository;
     private TvShowRepository tvShowRepository;
     private NetworkRepository networkRepository;
+    private GenreRepository genreRepository;
     private TvMazeService tvMazeService = new TvMazeService();
 
     @Autowired
     public PopulateTvShowsService(
             EpisodeRepository episodeRepository,
             TvShowRepository tvShowRepository,
-            NetworkRepository networkRepository) {
+            NetworkRepository networkRepository,
+            GenreRepository genreRepository) {
         this.episodeRepository = episodeRepository;
         this.tvShowRepository = tvShowRepository;
         this.networkRepository = networkRepository;
+        this.genreRepository = genreRepository;
     }
 
     private ArrayList<String> readAndFormatShowListFile(){
@@ -95,6 +100,7 @@ public class PopulateTvShowsService implements CommandLineRunner
             } else {
                 TvShow show = Factory.tvShowFactory(jsonRoot);
                 Network network;
+                List<Genre> genres = new ArrayList<>();
                 Long networkId = jsonRoot.path("network").path("id").asLong();
 
                 if(this.networkRepository.existsByExternalId(networkId)){
@@ -103,6 +109,17 @@ public class PopulateTvShowsService implements CommandLineRunner
                     network = Factory.networkFactory(jsonRoot.path("network"));
                 }
                 show.setNetwork(network);
+
+                jsonRoot.path("genres").elements().forEachRemaining(genre -> {
+                    if(genreRepository.existsByName(genre.asText())){
+                        genres.add(genreRepository.findFirstByName(genre.asText()));
+                    } else {
+                        genres.add(new Genre(genre.asText()));
+                    }
+                });
+                show.setGenres(genres);
+
+                this.genreRepository.saveAll(genres);
                 this.networkRepository.save(network);
                 this.tvShowRepository.save(show);
             }
