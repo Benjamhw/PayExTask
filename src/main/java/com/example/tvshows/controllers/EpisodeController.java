@@ -13,9 +13,4 @@ public class EpisodeController {
         this.repository = episodeRepository;
     }
 
-    @GetMapping("/testEpisodes")
-    Iterable<Episode> getAll(){
-        return repository.findAll();
-    }
-
 }
