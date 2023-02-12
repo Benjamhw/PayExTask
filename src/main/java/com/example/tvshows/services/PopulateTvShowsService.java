@@ -26,11 +26,11 @@ import java.util.Scanner;
 @Service
 public class PopulateTvShowsService implements CommandLineRunner
 {
-    private EpisodeRepository episodeRepository;
-    private TvShowRepository tvShowRepository;
-    private NetworkRepository networkRepository;
-    private GenreRepository genreRepository;
-    private TvMazeService tvMazeService = new TvMazeService();
+    private final EpisodeRepository episodeRepository;
+    private final TvShowRepository tvShowRepository;
+    private final NetworkRepository networkRepository;
+    private final GenreRepository genreRepository;
+    private final TvMazeService tvMazeService = new TvMazeService();
 
     @Autowired
     public PopulateTvShowsService(
