@@ -5,6 +5,7 @@ import com.example.tvshows.entities.TvShow;
 import com.example.tvshows.repositories.TvShowRepository;
 import com.example.tvshows.utils.TvShowUtils;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,13 @@ public class TvShowController {
         this.repository = repository;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/tvshow/all")
+    public List<TvShow> getAll(){
+        return repository.findAll();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/tvshow/top10", produces = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody byte[] getTop10(){
 
@@ -37,6 +45,7 @@ public class TvShowController {
         return outputString.toString().getBytes(StandardCharsets.UTF_8);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/tvshow/summary", produces = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody byte[] listTvShows(){
 
@@ -59,6 +68,7 @@ public class TvShowController {
         return outputString.toString().getBytes(StandardCharsets.UTF_8);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/tvshow/top-episode", produces = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody byte[] listTvShowsWithTopEpisode(){
         List<TvShow> tvShows = repository.findAll();

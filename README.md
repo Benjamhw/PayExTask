@@ -1,10 +1,15 @@
 <h1>Kandidatoppgave for PayEx</h1>
 
 <h3>Endepunkter</h3>
-* /network/top
-* /tvshow/top10
-* /tvshow/summary
-* /tvshow/top-episode
+* GET /network/top
+* GET /tvshow/top10
+* GET /tvshow/summary
+* GET /tvshow/top-episode
+
+Endepunktene sender txt-filer med raporter til
+brukeren. Disse filene er i utgangspunktet bare byte arrays
+som sendes direkte etter at de er generert. Det vil si at 
+de ikke lagres på serveren i mellomtiden. 
 
 <h3>Teknologier</h3>
 

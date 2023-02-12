@@ -4,6 +4,7 @@ import com.example.tvshows.entities.Network;
 import com.example.tvshows.entities.TvShow;
 import com.example.tvshows.repositories.NetworkRepository;
 import com.example.tvshows.utils.NetworkUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ public class NetworkController {
         this.repository = repository;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/network/top")
     public @ResponseBody byte[] getNetworks(){
 
